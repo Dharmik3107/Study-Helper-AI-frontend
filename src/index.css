@@ -3,25 +3,28 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #f5e6f0;
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #f5e6f0;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
 
-  /* theme colors  */
+	/* theme colors  */
 
-  --tropical-indigo: #9381ff;
-  --periwinkle: #b8b8ff;
-  --ghost-white: #f8f7ff;
-  --antique-white: #ffeedd;
-  --apricot: #ffd8be;
+	--tropical-indigo: #9381ff;
+	--periwinkle: #b8b8ff;
+	--ghost-white: #f8f7ff;
+	--antique-white: #ffeedd;
+	--apricot: #ffd8be;
+}
+::-webkit-scrollbar {
+	width: 0px;
 }
