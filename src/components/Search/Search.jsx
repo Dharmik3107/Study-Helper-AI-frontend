@@ -16,7 +16,7 @@ const Search = () => {
 			<input
 				type="search"
 				placeholder="Search here..."
-				className="w-[90%] sm:w-full max-w-[200px] h-10 rounded-md bg-ghostWhite indent-1 text-base font-semibold text-blackMagic placeholder:font-normal placeholder:text-sm"
+				className="w-[90%] sm:w-full max-w-[180px] sm:max-w-[200px] h-10 rounded-md bg-ghostWhite indent-2 text-base font-semibold text-blackMagic placeholder:font-normal placeholder:text-sm"
 				onFocus={handleSearchFocus}
 				onBlur={handleSearchFocus}
 			/>

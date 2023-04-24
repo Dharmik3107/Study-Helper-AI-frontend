@@ -63,3 +63,25 @@
 	transform: scaleX(1);
 	transform-origin: top left;
 }
+
+.border-custom {
+	border: 1px solid red;
+}
+
+/* Sidebar Styles for smooth sliding */
+.nonactive-chatlist {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 250px;
+	z-index: 10;
+	height: 100vh;
+	transform: translateX(-250px);
+	transition: 300ms transform ease-in-out;
+	box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.25);
+}
+.nonactive-chatlist.active {
+	transform: translateX(0px);
+	z-index: 10;
+	transition: 300ms transform;
+}
