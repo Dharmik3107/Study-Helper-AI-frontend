@@ -6,8 +6,8 @@ import Navigation from "../../components/Navigation/Navigation";
 
 const Chat = () => {
 	return (
-		<section className="w-full h-[900px] p-1 md:p-5">
-			<div className="w-full max-w-[1200px] mx-auto h-full bg-blackMagic rounded-2xl flex flex-col justify-start items-stretch p-2 md:p-5 gap-2">
+		<section className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full p-1 md:p-5 ">
+			<div className="w-full max-w-[1200px] mx-auto h-[900px] bg-blackMagic rounded-2xl flex flex-col justify-start items-stretch p-2 md:p-5 gap-2">
 				<div className="h-[10%] min-h-[80px] bg-darkGray col-span-2 rounded-xl">
 					<Navigation />
 				</div>
