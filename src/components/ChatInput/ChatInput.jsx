@@ -1,11 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { ReactComponent as SendIcon } from "../../assets/SendIcon.svg";
+
+import { setPromptValue } from "../../store/reducers/promptSlice";
 
 const ChatInput = () => {
 	const [inputText, setInputText] = useState("");
 	const textareaRef = useRef(null);
 	const divRef = useRef(null);
+
+	const prompt = useSelector((state) => state.prompt.promptString);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (inputText.length > 0) {
@@ -18,8 +24,9 @@ const ChatInput = () => {
 		}
 	}, [inputText]);
 
-	const handleInputChange = (e) => {
-		setInputText(e.target.value);
+	const handleInputChange = (event) => {
+		setInputText(event.target.value);
+		dispatch(setPromptValue(event.target.value));
 	};
 
 	return (
