@@ -4,7 +4,7 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Configuring firebase
 const firebaseConfig = {
-	apiKey: process.env.FIREBASE_API_KEY,
+	apiKey: "AIzaSyD986IxkoKerCP0HUMfg28e0-_KnuhTfeM",
 	authDomain: "study-helper-ai.firebaseapp.com",
 	projectId: "study-helper-ai",
 	storageBucket: "study-helper-ai.appspot.com",
