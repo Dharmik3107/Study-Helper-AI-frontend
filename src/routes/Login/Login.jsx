@@ -1,50 +1,94 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 import Button from "../../components/Button/Button";
 import Input from "./../../components/Input/Input";
 
 import { popupSignin, onAuthStateChangedListener, createUserDocument } from "../../utils/firebase/firebase";
+import { EmailLoginAPI } from "../../utils/BackendLinks";
 
-const initialFormValues = {
-	email: "",
-};
+import { ReactComponent as LeftArrow } from "../../assets/LeftArrow.svg";
+
+import { setUserCredentials } from "../../store/reducers/userSlice";
 
 const Login = () => {
-	const [user, setUser] = useState(initialFormValues);
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+
 	const [isEmailSubmitted, setEmailSubmitted] = useState(false);
+	const [generatedOTP, setGeneratedOTP] = useState("");
 	const navigate = useNavigate();
 
+	//Listening on user object change by firebase for google signin
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener((user) => {
 			if (user) {
 				createUserDocument(user);
-				setUser({ email: user?.email });
+				dispatch(setUserCredentials({ email: user?.email, otp: "000000" }));
 			}
 		});
 
 		return unsubscribe;
 	}, []);
 
+	//Login API Fetching using axios and storing up backend generated otp
+	useEffect(() => {
+		const fetchLoginAPI = async () => {
+			try {
+				if (user.email) {
+					const email = { email: user.email };
+					const result = await axios.post(EmailLoginAPI, email);
+					setGeneratedOTP(result.data.data.result.otp);
+					setEmailSubmitted(true);
+				}
+			} catch (error) {
+				console.error(error.message);
+			}
+		};
+		fetchLoginAPI();
+	}, [user]);
+
+	//function to execute form submission for login and otp verification
 	const handleLoginSubmit = (event) => {
-		console.log("called form");
 		event.preventDefault();
-		if (user.email) {
+		const { email, otp } = event.target;
+		if (isEmailSubmitted) {
+			dispatch(setUserCredentials({ ...user, otp: otp.value.toString() }));
+			if (user.otp === generatedOTP) {
+				navigate("/");
+				dispatch(setUserCredentials({ ...user, otp: "" }));
+			}
 		} else {
-			setEmail({ email: event.target.email.value });
+			dispatch(setUserCredentials({ email: email.value, otp: "" }));
 		}
 	};
 
+	//function to popup google signin window
 	const handleGoogleLogin = async () => {
 		await popupSignin();
-		navigate("/");
+		if (user.email) {
+			navigate("/");
+		}
 	};
 
+	//Storing user typed OTP
+	const handleOTPInsert = (event) => {
+		dispatch(setUserCredentials({ ...user, otp: event.target.value }));
+	};
+
+	//Function to redirect on email continue form
+	const handleBackArrow = () => {
+		setEmailSubmitted(false);
+		dispatch(setUserCredentials({ email: "", otp: "" }));
+	};
 	return (
 		<section className="w-[95%] h-full flex justify-center items-center mx-auto">
 			{isEmailSubmitted && (
 				<form onSubmit={handleLoginSubmit} className="relative w-full max-w-[400px] h-[400px] px-5 bg-blackMagic rounded-xl flex flex-col justify-center items-center">
-					<Input type="number" name="otp" id="otp" label="Enter OTP" placeholder="Enter your one-time-password" />
+					<LeftArrow className="absolute top-2 left-2 w-8 h-8 fill-ghostWhite" onClick={handleBackArrow} />
+					<Input type="number" name="otp" id="otp" label="Enter OTP" placeholder="Enter your one-time-password" onChange={handleOTPInsert} />
 					<div className="w-full h-3"></div>
 					<Button type="submit" buttonText="Sign in" />
 				</form>

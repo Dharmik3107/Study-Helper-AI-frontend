@@ -1,5 +1,7 @@
 import React from "react";
 import HistoryCard from "../HistoryCard/HistoryCard";
+import AddNewChat from "../AddNewChat/AddNewChat";
+import Logout from "../Logout/Logout";
 
 const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 	const handleBackClick = () => {
@@ -13,7 +15,8 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 			<button className="bg-[transparent] border-none outline-none absolute top-2 left-2 w-5 h-5 text-4xl font-bold text-antiqueWhite" onClick={handleBackClick}>
 				&#8678;
 			</button>
-			<div className="w-full h-[80%] flex flex-col justify-start items-center overflow-y-scroll">
+			<div className="w-full h-[95%] flex flex-col justify-start items-center overflow-y-scroll">
+				<AddNewChat />
 				<HistoryCard />
 				<HistoryCard />
 				<HistoryCard />
@@ -39,6 +42,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 				<HistoryCard />
 				<HistoryCard />
 				<HistoryCard />
+				<Logout />
 			</div>
 		</div>
 	);
