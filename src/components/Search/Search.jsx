@@ -9,7 +9,6 @@ const Search = () => {
 
 	//Function Reset typed characters in search box to empty
 	const handleResetSearch = () => {
-		console.log("Reseting");
 		dispatch(setSearchValue(""));
 	};
 

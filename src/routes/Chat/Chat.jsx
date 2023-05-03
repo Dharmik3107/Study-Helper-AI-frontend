@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import ChatList from "../../components/ChatList/ChatList";
 import Navigation from "../../components/Navigation/Navigation";
@@ -7,6 +8,16 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 const Chat = () => {
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+	const navigate = useNavigate();
+
+	const user = useSelector((state) => state.user);
+
+	useEffect(() => {
+		if (user.email === "") {
+			navigate("/login");
+		}
+	}, [user.email]);
 
 	return (
 		<>

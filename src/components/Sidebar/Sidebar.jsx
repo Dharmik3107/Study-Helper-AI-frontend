@@ -17,6 +17,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 			</button>
 			<div className="w-full h-[95%] flex flex-col justify-start items-center overflow-y-scroll">
 				<AddNewChat />
+				{/* <HistoryCard />
 				<HistoryCard />
 				<HistoryCard />
 				<HistoryCard />
@@ -40,8 +41,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
 				<HistoryCard />
 				<HistoryCard />
 				<HistoryCard />
-				<HistoryCard />
-				<HistoryCard />
+				<HistoryCard /> */}
 				<Logout />
 			</div>
 		</div>

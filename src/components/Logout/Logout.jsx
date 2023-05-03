@@ -15,7 +15,10 @@ const Logout = () => {
 		navigate("/login");
 	};
 	return (
-		<button className="w-[calc(100%_-_8px)] h-12 bg-blackMagic absolute bottom-1 left-1 rounded-lg outline-none border-none flex  justify-center items-center gap-2 text-lg" onClick={handleLogout}>
+		<button
+			className="w-[calc(100%_-_8px)] h-12 bg-blackMagic absolute bottom-1 left-1 rounded-lg outline-none border-none flex  justify-center items-center gap-2 text-lg z-[3]"
+			onClick={handleLogout}
+		>
 			<LogoutICon />
 			Logout
 		</button>

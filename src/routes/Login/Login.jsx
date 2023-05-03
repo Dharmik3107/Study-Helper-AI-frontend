@@ -37,18 +37,18 @@ const Login = () => {
 	useEffect(() => {
 		const fetchLoginAPI = async () => {
 			try {
-				if (user.email) {
-					const email = { email: user.email };
-					const result = await axios.post(EmailLoginAPI, email);
-					setGeneratedOTP(result.data.data.result.otp);
-					setEmailSubmitted(true);
-				}
+				const email = { email: user.email };
+				const result = await axios.post(EmailLoginAPI, email);
+				setGeneratedOTP(result.data.message.otp);
+				setEmailSubmitted(true);
 			} catch (error) {
 				console.error(error.message);
 			}
 		};
-		fetchLoginAPI();
-	}, [user]);
+		if (user.email !== "") {
+			fetchLoginAPI();
+		}
+	}, [user.email]);
 
 	//function to execute form submission for login and otp verification
 	const handleLoginSubmit = (event) => {
@@ -57,7 +57,7 @@ const Login = () => {
 		if (isEmailSubmitted) {
 			dispatch(setUserCredentials({ ...user, otp: otp.value.toString() }));
 			if (user.otp === generatedOTP) {
-				navigate("/");
+				navigate("/chat");
 				dispatch(setUserCredentials({ ...user, otp: "" }));
 			}
 		} else {
@@ -69,7 +69,7 @@ const Login = () => {
 	const handleGoogleLogin = async () => {
 		await popupSignin();
 		if (user.email) {
-			navigate("/");
+			navigate("/chat");
 		}
 	};
 
@@ -100,11 +100,14 @@ const Login = () => {
 					<div className="w-full h-5"></div>
 					<Button type="submit" buttonText="Continue" />
 					<h1 className="my-2">OR</h1>
-					<Link to={user.email ? "/" : ""} className="w-full flex justify-center" onClick={handleGoogleLogin}>
+					<Link to="" className="w-full flex justify-center" onClick={handleGoogleLogin}>
 						<Button type="button" buttonText="Google Sign in" buttonType="google" />
 					</Link>
 				</form>
 			)}
+			<Link to="/" className="text-blackMagic absolute top-5 left-5 text-xl font-bold w-20 h-20 bg-ghostWhite rounded-[50%] flex justify-center items-center shadow-xl">
+				Home
+			</Link>
 		</section>
 	);
 };

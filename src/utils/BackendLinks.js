@@ -8,14 +8,11 @@ export const EmailVerifyAPI = `${BACKEND}api/verify`;
 //Req Params = email , otp --- Res = message
 
 // Chat APIs
-export const NewChatAPI = `${BACKEND}chat/newchat`;
+export const GetResponseAPI = `${BACKEND}chat/getresponse`;
 //Req Params = email, message, chatId, subject --- Res = ChatDoc[{email , chatId, chatTitle, chatData{timestamp,subject, message, response},...]}
 
 export const GetChatAPI = `${BACKEND}chat/getchat`;
 //Req Params = email, chatId, chatTitle --- Res = ChatDoc[{email , chatId, chatTitle, chatData{timestamp,subject, message, response},...]}
-
-export const UpdateChatAPI = `${BACKEND}chat/updatechat`;
-//Req Params = email, message, chatId, chatTitle, subject --- Res = ChatDoc[{email , chatId, chatTitle, chatData{timestamp,subject, message, response},...]}
 
 export const updateTitleAPI = `${BACKEND}chat/updatetitle`;
 //Req Params = email, chatId, chatTitle --- Res = ChatDoc[{email , chatId, chatTitle, chatData{timestamp,subject, message, response},...}]
