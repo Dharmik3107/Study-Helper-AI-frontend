@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "../../components/Button/Button";
 import Input from "./../../components/Input/Input";
 
-import { popupSignin, onAuthStateChangedListener, createUserDocument } from "../../utils/firebase/firebase";
+import { popupSignin, onAuthStateChangedListener, createUserDocument, currentUser } from "../../utils/firebase/firebase";
 import { EmailLoginAPI } from "../../utils/BackendLinks";
 
 import { ReactComponent as LeftArrow } from "../../assets/LeftArrow.svg";
@@ -15,23 +15,28 @@ import { setUserCredentials } from "../../store/reducers/userSlice";
 
 const Login = () => {
 	const user = useSelector((state) => state.user);
+	console.log(user);
 	const dispatch = useDispatch();
 
 	const [isEmailSubmitted, setEmailSubmitted] = useState(false);
 	const [generatedOTP, setGeneratedOTP] = useState("");
 	const navigate = useNavigate();
+	console.log(currentUser);
 
 	//Listening on user object change by firebase for google signin
-	useEffect(() => {
-		const unsubscribe = onAuthStateChangedListener((user) => {
-			if (user) {
-				createUserDocument(user);
-				dispatch(setUserCredentials({ email: user?.email, otp: "000000" }));
-			}
-		});
+	// useEffect(() => {
+	// 	const unsubscribe = onAuthStateChangedListener((user) => {
+	// 		if (user) {
+	// 			createUserDocument(user);
+	// 			console.log(user);
+	// 			dispatch(setUserCredentials({ email: user?.email, otp: "000000" }));
+	// 		} else {
+	// 			dispatch(setUserCredentials({ email: "", otp: "" }));
+	// 		}
+	// 	});
 
-		return unsubscribe;
-	}, []);
+	// 	return unsubscribe;
+	// }, []);
 
 	//Login API Fetching using axios and storing up backend generated otp
 	useEffect(() => {
@@ -67,11 +72,19 @@ const Login = () => {
 
 	//function to popup google signin window
 	const handleGoogleLogin = async () => {
-		await popupSignin();
-		if (user.email) {
-			navigate("/chat");
+		const result = await popupSignin();
+		console.log(result.user);
+		if (result.user) {
+			createUserDocument(result.user);
+			dispatch(setUserCredentials({ email: result.user.email, otp: "000000" }));
 		}
 	};
+
+	useEffect(() => {
+		if (user.email !== "") {
+			navigate("/chat");
+		}
+	}, [user.email]);
 
 	//Storing user typed OTP
 	const handleOTPInsert = (event) => {

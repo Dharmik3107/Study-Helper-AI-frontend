@@ -44,8 +44,10 @@ const ChatList = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			if (user.email !== "") {
+			if (user.email !== "" && titles.length > 0) {
 				navigate(`${titles[0]?.chatId}`);
+			} else {
+				navigate(`/chat`);
 			}
 		}, 0);
 	}, [titles[0]?.chatId]);

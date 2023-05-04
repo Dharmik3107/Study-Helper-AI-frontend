@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Configuring firebase
@@ -24,6 +24,8 @@ export const popupSignin = () => signInWithPopup(auth, provider);
 
 //Calling getFirestore function to work with firestore
 export const database = getFirestore();
+
+export const currentUser = auth.currentUser;
 
 //Creating user document to store details in firebase datastore
 export const createUserDocument = async (userData, otherData = {}) => {
@@ -51,3 +53,6 @@ export const createUserDocument = async (userData, otherData = {}) => {
 
 //Authentication state change listener
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+//function to signout
+export const signOutUser = async () => await signOut(auth);

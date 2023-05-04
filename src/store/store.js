@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore } from "redux-persist";
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 import searchReducer from "./reducers/searchSlice";
 import promptReducer from "./reducers/promptSlice";
@@ -15,6 +15,12 @@ export const store = configureStore({
 		chat: chatReducer,
 		titles: chatListReducer,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 });
 
 export const persistor = persistStore(store);

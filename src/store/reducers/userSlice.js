@@ -7,7 +7,7 @@ const persistConfig = {
 	storage: storage,
 };
 
-const initialState = {
+export const initialState = {
 	email: "",
 	otp: "",
 };

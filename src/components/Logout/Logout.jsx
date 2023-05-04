@@ -4,15 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as LogoutICon } from "../../assets/Logout.svg";
 
-import { setUserCredentials } from "../../store/reducers/userSlice";
+import { setUserCredentials, initialState } from "../../store/reducers/userSlice";
+import { signOutUser } from "../../utils/firebase/firebase";
 
 const Logout = () => {
+	const user = useSelector((state) => state.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const handleLogout = () => {
-		dispatch(setUserCredentials({ email: "", otp: "" }));
-		navigate("/login");
+	const handleLogout = async () => {
+		if (user.otp === "000000") {
+			await signOutUser();
+			dispatch(setUserCredentials(initialState));
+			if (user.email === "") navigate("/login");
+		} else {
+			dispatch(setUserCredentials(initialState));
+			navigate("/login");
+		}
 	};
 	return (
 		<button
