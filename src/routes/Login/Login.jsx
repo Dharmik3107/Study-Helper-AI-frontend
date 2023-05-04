@@ -57,8 +57,8 @@ const Login = () => {
 		if (isEmailSubmitted) {
 			dispatch(setUserCredentials({ ...user, otp: otp.value.toString() }));
 			if (user.otp === generatedOTP) {
-				navigate("/chat");
 				dispatch(setUserCredentials({ ...user, otp: "" }));
+				navigate("/chat");
 			}
 		} else {
 			dispatch(setUserCredentials({ email: email.value, otp: "" }));

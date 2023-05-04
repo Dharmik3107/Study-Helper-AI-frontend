@@ -50,7 +50,8 @@ const ChatInput = () => {
 	useEffect(() => {
 		const fetchNewChatAPI = async () => {
 			try {
-				const apiData = { email: user.email, message: submittedMessage, chatId: newUniqueId, messageId: messageId, subject: chat.subject };
+				const apiData = { email: user.email, message: submittedMessage, chatId: chat.chatId, messageId: messageId, subject: chat.subject };
+				console.log(apiData);
 				const result = await axios.post(GetResponseAPI, apiData);
 				const resultArray = result.data.message.chatData;
 				const [response] = resultArray.filter((response) => messageId === response.messageId);
@@ -58,8 +59,9 @@ const ChatInput = () => {
 				dispatch(setResponse({ messageId: messageId, response: editedResponse }));
 				dispatch(setChat(result.data.message));
 				// dispatch(setChatId(result.data.message.chatId));
-				if (titles[0].chatId === "newchat") {
-					dispatch(setChatId(newUniqueId));
+				if (titles[0].title === "New Chat") {
+					console.log("called");
+					// dispatch(setChatId(newUniqueId));
 					dispatch(editTitle({ title: result.data.message.chatTitle, chatId: newUniqueId }));
 				}
 			} catch (error) {
@@ -83,7 +85,10 @@ const ChatInput = () => {
 		const inputValue = event.target.textarea.value;
 		const messageId = uuidv4();
 		setMessageId(messageId);
-		dispatch(setChat({ ...chat, chatId: newUniqueId }));
+		if (chat.chatId === "newchat") {
+			dispatch(setChat({ ...chat, chatId: newUniqueId }));
+			dispatch(setChatId(newUniqueId));
+		}
 		dispatch(setMessage({ messageId: messageId, message: inputValue }));
 		setSubmittedMessage(inputValue);
 		setInputText("");

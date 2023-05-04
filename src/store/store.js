@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore } from "redux-persist";
 
 import searchReducer from "./reducers/searchSlice";
 import promptReducer from "./reducers/promptSlice";
@@ -14,4 +15,10 @@ export const store = configureStore({
 		chat: chatReducer,
 		titles: chatListReducer,
 	},
+});
+
+export const persistor = persistStore(store);
+
+window.addEventListener("beforeunload", function () {
+	persistor.purge();
 });

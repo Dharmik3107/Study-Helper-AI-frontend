@@ -25,18 +25,19 @@ const ChatArea = () => {
 		const fetchGetChatAPI = async () => {
 			try {
 				const response = await axios.get(`${GetChatAPI}?email=${user.email}&chatId=${url.chatId}`);
-				if (response.data.status === 200) {
+				console.log(response);
+				if (response.status === 200) {
 					dispatch(setChat(response.data.message));
-					navigate(`${titles[0]?.chatId}`);
 				}
-				if (response.data.status === 404) {
-					navigate(`${titles[0]?.chatId}`);
+				if (response.status === 404) {
+					navigate(`/chat/${titles[0]?.chatId}`);
 				}
 			} catch (error) {
 				console.error(error);
 			}
 		};
-		if (url.chatId !== "" && url.chatId !== "newchat" && user.email !== "" && url.chatId !== undefined) {
+		if (url.chatId !== "" && url.chatId !== "newchat" && user.email !== "") {
+			console.log("fetchget");
 			fetchGetChatAPI();
 		}
 	}, [url.chatId]);
@@ -48,7 +49,7 @@ const ChatArea = () => {
 	return (
 		<div className="w-full h-full flex flex-col justify-end items-stretch">
 			<div className="w-full h-full overflow-y-scroll">
-				{chat.chatData.map((element, index) => {
+				{chat.chatData.map((element) => {
 					return (
 						<Fragment key={element.messageId}>
 							{element.message && <Message message={element.message} />}

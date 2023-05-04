@@ -53,7 +53,6 @@ const ChatList = () => {
 	const memoizedHistoryCardArray = useMemo(() => {
 		return titles
 			.filter((element) => {
-				console.log("called");
 				return element.title.includes(searchValue);
 			})
 			.map((element) => {
