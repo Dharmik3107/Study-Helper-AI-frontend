@@ -14,7 +14,7 @@ const Navigation = ({ setSidebarOpen }) => {
 		<>
 			<div className="w-full h-full flex justify-between items-center px-2 sm:px-5">
 				<Hamburger className="inline-block md:hidden w-8 h-8 mr-2" onClick={handleHamburgerClick} />
-				<Search />
+				<Search styles="hidden md:flex h-full justify-start" />
 				<Profile />
 			</div>
 		</>

@@ -51,7 +51,6 @@ const ChatInput = () => {
 		const fetchNewChatAPI = async () => {
 			try {
 				const apiData = { email: user.email, message: submittedMessage, chatId: chat.chatId, messageId: messageId, subject: chat.subject };
-				console.log(apiData);
 				const result = await axios.post(GetResponseAPI, apiData);
 				const resultArray = result.data.message.chatData;
 				const [response] = resultArray.filter((response) => messageId === response.messageId);
@@ -60,7 +59,6 @@ const ChatInput = () => {
 				dispatch(setChat(result.data.message));
 				// dispatch(setChatId(result.data.message.chatId));
 				if (titles[0].title === "New Chat") {
-					console.log("called");
 					// dispatch(setChatId(newUniqueId));
 					dispatch(editTitle({ title: result.data.message.chatTitle, chatId: newUniqueId }));
 				}
@@ -82,6 +80,10 @@ const ChatInput = () => {
 	//storing user input in global store
 	const handleMessageSubmit = (event) => {
 		event.preventDefault();
+		if (user.email == "") {
+			navigate("/login");
+			return;
+		}
 		const inputValue = event.target.textarea.value;
 		const messageId = uuidv4();
 		setMessageId(messageId);

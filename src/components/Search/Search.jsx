@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setSearchValue } from "../../store/reducers/searchSlice";
 
-const Search = () => {
+const Search = ({ styles }) => {
 	const search = useSelector((state) => state.search.searchString);
 	const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Search = () => {
 	};
 
 	return (
-		<div className="relative w-[200px] h-full flex justify-start items-center">
+		<div className={`relative w-[200px] flex items-center ${styles}`}>
 			<input
 				type="search"
 				placeholder="Search here..."

@@ -12,10 +12,6 @@ const AddNewChat = () => {
 
 	useEffect(() => {}, [chatList.length]);
 
-	const user = useSelector((state) => state.user);
-	const titles = useSelector((state) => state.titles.chatTitles);
-	const chat = useSelector((state) => state.chat);
-
 	const handleAddNewChatClick = () => {
 		navigate(`/chat`);
 	};

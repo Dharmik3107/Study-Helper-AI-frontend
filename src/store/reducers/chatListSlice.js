@@ -37,8 +37,6 @@ export const chatListSlice = createSlice({
 		},
 		deleteTitle: (state, value) => {
 			const filteredList = state.chatTitles.filter((element) => {
-				console.log("Delete Title", element.chatId === value.payload.chatId);
-				console.log("Delete Title", element.chatId, value.payload.chatId);
 				if (element.chatId !== value.payload.chatId) return element;
 			});
 			state.chatTitles = filteredList;

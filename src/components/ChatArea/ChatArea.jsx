@@ -25,7 +25,6 @@ const ChatArea = () => {
 		const fetchGetChatAPI = async () => {
 			try {
 				const response = await axios.get(`${GetChatAPI}?email=${user.email}&chatId=${url.chatId}`);
-				console.log(response);
 				if (response.status === 200) {
 					dispatch(setChat(response.data.message));
 				}
@@ -37,7 +36,6 @@ const ChatArea = () => {
 			}
 		};
 		if (url.chatId !== "" && url.chatId !== "newchat" && user.email !== "") {
-			console.log("fetchget");
 			fetchGetChatAPI();
 		}
 	}, [url.chatId]);
