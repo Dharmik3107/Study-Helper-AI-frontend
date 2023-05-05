@@ -55,7 +55,7 @@ const ChatArea = () => {
 						</Fragment>
 					);
 				})}
-				<div ref={messagesEndRef} />
+				<div ref={messagesEndRef} className="absolute bottom-1 left-1 w-[calc(100%_-_8px)]	" />
 			</div>
 		</div>
 	);

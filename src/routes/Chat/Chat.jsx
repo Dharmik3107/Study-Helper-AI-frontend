@@ -17,7 +17,7 @@ const Chat = () => {
 		if (user.email === "") {
 			navigate("/login");
 		}
-	}, [user.email]);
+	}, []);
 
 	return (
 		<>

@@ -57,9 +57,7 @@ const ChatInput = () => {
 				const editedResponse = response.response;
 				dispatch(setResponse({ messageId: messageId, response: editedResponse }));
 				dispatch(setChat(result.data.message));
-				// dispatch(setChatId(result.data.message.chatId));
 				if (titles[0].title === "New Chat") {
-					// dispatch(setChatId(newUniqueId));
 					dispatch(editTitle({ title: result.data.message.chatTitle, chatId: newUniqueId }));
 				}
 			} catch (error) {
