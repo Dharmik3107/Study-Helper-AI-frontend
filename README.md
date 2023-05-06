@@ -44,7 +44,9 @@ To generate controlled response from ChatGPT AI,Prompt Designing method is used.
 
 ### History
 
-[![Watch the video](https://img.youtube.com/vi/8z-dzYsTi7k/maxresdefault.jpg)](https://youtu.be/8z-dzYsTi7k)## Theme
+[![Watch the video](https://img.youtube.com/vi/8z-dzYsTi7k/maxresdefault.jpg)](https://youtu.be/8z-dzYsTi7k)
+
+## Theme
 
 | Color         | Hex                                                              |
 | ------------- | ---------------------------------------------------------------- |
