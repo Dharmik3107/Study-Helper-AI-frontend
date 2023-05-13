@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import Message from "../Message/Message";
@@ -14,11 +14,13 @@ const ChatArea = () => {
 	const chat = useSelector((state) => state.chat);
 	const user = useSelector((state) => state.user);
 	const titles = useSelector((state) => state.titles.chatTitles);
-	const url = useParams();
+
 	const messagesEndRef = useRef(null);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const url = useLocation().pathname;
+
 	//!API Call
 	//API Calling in side effect to update title in database
 	useEffect(() => {
@@ -55,7 +57,7 @@ const ChatArea = () => {
 						</Fragment>
 					);
 				})}
-				<div ref={messagesEndRef} className="absolute bottom-1 left-1 w-[calc(100%_-_8px)]	" />
+				<div ref={messagesEndRef} />
 			</div>
 		</div>
 	);
